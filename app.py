@@ -23,4 +23,5 @@ def results_page():
 
     story = silly_story.get_result_text(request.args)
     return render_template("results.html",
-                           interpolated_story=story)
+                           story=story)
+    # can just call it story
