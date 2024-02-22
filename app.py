@@ -1,16 +1,25 @@
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 
-from stories import silly_story
+from stories import silly_story, excited_story
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secret"
 
 debug = DebugToolbarExtension(app)
 
+STORIES = {'silly': silly_story, 'excited': excited_story}
+
 
 @app.get('/')
 def home_page():
+    """Returns the homepage"""
+    return render_template('story_templates.html',
+                           stories=STORIES.keys())
+
+
+@app.get('/questions')
+def questions_page():
     """Returns the homepage"""
 
     return render_template('questions.html',
